@@ -25,9 +25,10 @@
 		9CBDBCC024F0F71600D5BDA4 /* SimpleAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CBDBCB024F0F71500D5BDA4 /* SimpleAPIClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CBDBCC324F0F71600D5BDA4 /* SimpleAPIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CBDBCAE24F0F71500D5BDA4 /* SimpleAPIClient.framework */; };
 		9CBDBCC424F0F71600D5BDA4 /* SimpleAPIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9CBDBCAE24F0F71500D5BDA4 /* SimpleAPIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9CBDBCCC24F0F83200D5BDA4 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCCB24F0F83200D5BDA4 /* Status.swift */; };
+		9CBDBCCC24F0F83200D5BDA4 /* StatusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCCB24F0F83200D5BDA4 /* StatusAPI.swift */; };
 		9CBDBCCE24F0F89100D5BDA4 /* SimpleAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCCD24F0F89100D5BDA4 /* SimpleAPIClient.swift */; };
-		9CBDBCD024F100FF00D5BDA4 /* TabAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCCF24F100FF00D5BDA4 /* TabAView.swift */; };
+		9CBDBCD024F100FF00D5BDA4 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCCF24F100FF00D5BDA4 /* StatusView.swift */; };
+		9CBDBCD224F119CC00D5BDA4 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCD124F119CC00D5BDA4 /* StatusViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,9 +132,10 @@
 		9CBDBCB624F0F71500D5BDA4 /* SimpleAPIClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleAPIClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CBDBCBD24F0F71600D5BDA4 /* SimpleAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAPIClientTests.swift; sourceTree = "<group>"; };
 		9CBDBCBF24F0F71600D5BDA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9CBDBCCB24F0F83200D5BDA4 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		9CBDBCCB24F0F83200D5BDA4 /* StatusAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusAPI.swift; sourceTree = "<group>"; };
 		9CBDBCCD24F0F89100D5BDA4 /* SimpleAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAPIClient.swift; sourceTree = "<group>"; };
-		9CBDBCCF24F100FF00D5BDA4 /* TabAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabAView.swift; sourceTree = "<group>"; };
+		9CBDBCCF24F100FF00D5BDA4 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
+		9CBDBCD124F119CC00D5BDA4 /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,7 +229,8 @@
 				9CBDBC5624F0F68400D5BDA4 /* AppDelegate.swift */,
 				9CBDBC5824F0F68400D5BDA4 /* SceneDelegate.swift */,
 				9CBDBC5A24F0F68400D5BDA4 /* ContentView.swift */,
-				9CBDBCCF24F100FF00D5BDA4 /* TabAView.swift */,
+				9CBDBCCF24F100FF00D5BDA4 /* StatusView.swift */,
+				9CBDBCD124F119CC00D5BDA4 /* StatusViewModel.swift */,
 				9CBDBC5C24F0F68600D5BDA4 /* Assets.xcassets */,
 				9CBDBC6124F0F68600D5BDA4 /* LaunchScreen.storyboard */,
 				9CBDBC6424F0F68600D5BDA4 /* Info.plist */,
@@ -265,7 +268,7 @@
 		9CBDBC8C24F0F6CD00D5BDA4 /* GithubStatusAPIs */ = {
 			isa = PBXGroup;
 			children = (
-				9CBDBCCB24F0F83200D5BDA4 /* Status.swift */,
+				9CBDBCCB24F0F83200D5BDA4 /* StatusAPI.swift */,
 				9CBDBC8D24F0F6CD00D5BDA4 /* GithubStatusAPIs.h */,
 				9CBDBC8E24F0F6CD00D5BDA4 /* Info.plist */,
 			);
@@ -575,7 +578,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CBDBCD024F100FF00D5BDA4 /* TabAView.swift in Sources */,
+				9CBDBCD024F100FF00D5BDA4 /* StatusView.swift in Sources */,
+				9CBDBCD224F119CC00D5BDA4 /* StatusViewModel.swift in Sources */,
 				9CBDBC5724F0F68400D5BDA4 /* AppDelegate.swift in Sources */,
 				9CBDBC5924F0F68400D5BDA4 /* SceneDelegate.swift in Sources */,
 				9CBDBC5B24F0F68400D5BDA4 /* ContentView.swift in Sources */,
@@ -602,7 +606,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CBDBCCC24F0F83200D5BDA4 /* Status.swift in Sources */,
+				9CBDBCCC24F0F83200D5BDA4 /* StatusAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

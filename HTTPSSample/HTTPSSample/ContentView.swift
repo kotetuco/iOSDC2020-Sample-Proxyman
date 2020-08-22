@@ -11,11 +11,11 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            TabAView()
+            StatusView(viewModel: StatusViewModel())
                 .tabItem {
                     VStack {
                         Image(systemName: "1.square.fill")
-                        Text("One")
+                        Text("Status")
                     }
                 }
         }
