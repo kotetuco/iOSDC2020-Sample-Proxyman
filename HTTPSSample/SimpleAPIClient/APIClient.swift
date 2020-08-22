@@ -20,12 +20,13 @@ public final class APIClient {
 
     public func jsonRequest(with url: URL,
                             timeoutInterval: TimeInterval,
+                            isCachedResponse: Bool = false,
                             _ completion: @escaping (Result<Data, APIError>) -> Void) {
-        let request = URLRequest(url: url)
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = timeoutInterval
-        configuration.timeoutIntervalForResource = timeoutInterval
-        let session = URLSession(configuration: configuration)
+        let request = URLRequest(url: url,
+                                 cachePolicy: isCachedResponse ? .returnCacheDataElseLoad : .reloadIgnoringCacheData,
+                                 timeoutInterval: timeoutInterval)
+
+        let session = URLSession(configuration: .default)
         let dataTask = session.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(.networkError(error)))
@@ -49,6 +50,7 @@ public final class APIClient {
             }
             completion(.success(data))
         }
+
         dataTask.resume()
     }
 }
