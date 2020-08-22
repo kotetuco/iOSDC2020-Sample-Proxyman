@@ -13,11 +13,30 @@ struct StatusView: View {
     @ObservedObject var viewModel: StatusViewModel
 
     var body: some View {
-        ZStack(alignment: .top) {
-            NavigationView {
-                Text(viewModel.status)
-                    .navigationBarTitle("Github Status", displayMode: .inline)
+        NavigationView {
+            VStack {
+                VStack(alignment: .leading) {
+                    Text("Status API Response")
+                        .font(.title)
+                    HStack(alignment: .top) {
+                        Text(viewModel.status)
+                            .font(.body)
+                        Spacer()
+                    }
+                }
+                Spacer()
+                VStack(alignment: .center) {
+                    Button(action: {
+                        self.viewModel.fetch()
+                    }) {
+                        Text("Reload")
+                            .font(.title)
+                    }
+                    .disabled(viewModel.disabled)
+                }
             }
+            .padding()
+            .navigationBarTitle("Github Status", displayMode: .inline)
         }
     }
 }
