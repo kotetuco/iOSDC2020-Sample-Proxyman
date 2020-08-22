@@ -26,7 +26,7 @@
 		9CBDBCC324F0F71600D5BDA4 /* SimpleAPIClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CBDBCAE24F0F71500D5BDA4 /* SimpleAPIClient.framework */; };
 		9CBDBCC424F0F71600D5BDA4 /* SimpleAPIClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9CBDBCAE24F0F71500D5BDA4 /* SimpleAPIClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9CBDBCCC24F0F83200D5BDA4 /* StatusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCCB24F0F83200D5BDA4 /* StatusAPI.swift */; };
-		9CBDBCCE24F0F89100D5BDA4 /* SimpleAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCCD24F0F89100D5BDA4 /* SimpleAPIClient.swift */; };
+		9CBDBCCE24F0F89100D5BDA4 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCCD24F0F89100D5BDA4 /* APIClient.swift */; };
 		9CBDBCD024F100FF00D5BDA4 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCCF24F100FF00D5BDA4 /* StatusView.swift */; };
 		9CBDBCD224F119CC00D5BDA4 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBDBCD124F119CC00D5BDA4 /* StatusViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -133,7 +133,7 @@
 		9CBDBCBD24F0F71600D5BDA4 /* SimpleAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAPIClientTests.swift; sourceTree = "<group>"; };
 		9CBDBCBF24F0F71600D5BDA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CBDBCCB24F0F83200D5BDA4 /* StatusAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusAPI.swift; sourceTree = "<group>"; };
-		9CBDBCCD24F0F89100D5BDA4 /* SimpleAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAPIClient.swift; sourceTree = "<group>"; };
+		9CBDBCCD24F0F89100D5BDA4 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		9CBDBCCF24F100FF00D5BDA4 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		9CBDBCD124F119CC00D5BDA4 /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -287,7 +287,7 @@
 		9CBDBCAF24F0F71500D5BDA4 /* SimpleAPIClient */ = {
 			isa = PBXGroup;
 			children = (
-				9CBDBCCD24F0F89100D5BDA4 /* SimpleAPIClient.swift */,
+				9CBDBCCD24F0F89100D5BDA4 /* APIClient.swift */,
 				9CBDBCB024F0F71500D5BDA4 /* SimpleAPIClient.h */,
 				9CBDBCB124F0F71500D5BDA4 /* Info.plist */,
 			);
@@ -622,7 +622,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CBDBCCE24F0F89100D5BDA4 /* SimpleAPIClient.swift in Sources */,
+				9CBDBCCE24F0F89100D5BDA4 /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

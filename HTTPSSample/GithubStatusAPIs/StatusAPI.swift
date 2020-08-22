@@ -6,20 +6,22 @@
 //  Copyright © 2020 kotetu. All rights reserved.
 //
 
-struct StatusAPI {
-    struct Page: Decodable {
-        let id: String
-        let name: String
-        let url: URL
+public struct StatusAPI {
+    public static let urlString = "https://kctbh9vrtdwd.statuspage.io/api/v2/status.json"
+
+    public struct Page: Decodable {
+        public let id: String
+        public let name: String
+        public let url: URL
     }
 
-    struct Response: Decodable {
-       let page: Page
-       let status: Status
+    public struct Response: Decodable {
+       public let page: Page
+       public let status: Status
     }
 
-    struct Status: Decodable {
-        let description: String
-        let indicator: String
+    public struct Status: Decodable {
+        public let description: String
+        public let indicator: String
     }
 }
