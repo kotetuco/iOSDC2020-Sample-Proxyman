@@ -32,7 +32,7 @@ struct StatusView: View {
                         Text("Reload")
                             .font(.title)
                     }
-                    .disabled(viewModel.disabled)
+                    .disabled(viewModel.loading)
                 }
             }
             .padding()

@@ -13,18 +13,18 @@ import SimpleAPIClient
 
 final class StatusViewModel: ObservableObject {
     @Published var status = "Getting status..."
-    @Published var disabled = false
+    @Published var loading = false
 
     init() {
         fetch()
     }
 
     func fetch() {
-        disabled = true
+        loading = true
         status = "Getting status..."
         guard let url = URL(string: StatusAPI.urlString) else {
             status = "Invalid URL."
-            disabled = false
+            loading = false
             return
         }
 
@@ -42,7 +42,7 @@ final class StatusViewModel: ObservableObject {
                 case let .failure(error):
                     self.status = "Error occured:\(error)"
                 }
-                self.disabled = false
+                self.loading = false
             }
         }
     }
