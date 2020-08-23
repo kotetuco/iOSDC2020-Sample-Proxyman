@@ -28,6 +28,7 @@ final class StatusViewModel: ObservableObject {
     func fetch() {
         loading = true
         status = "Getting status..."
+
         guard let url = URL(string: StatusAPI.urlString) else {
             status = "Invalid URL."
             loading = false
@@ -37,6 +38,7 @@ final class StatusViewModel: ObservableObject {
         // ゆっくり通信内容を確認するため、タイムアウト時間を長めに設定しておく(300s)
         let publisher: AnyPublisher<StatusAPI.Response, Error> = APIClient.shared.jsonRequest(with: url, timeoutInterval: 300)
         publisher
+            .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self]  result in
                 switch result {
