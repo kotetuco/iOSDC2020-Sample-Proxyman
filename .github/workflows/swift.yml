@@ -21,6 +21,7 @@ jobs:
             -sdk iphonesimulator
             -configuration Debug
             build
+      working-directory: ./HTTPSSample
     # Run unit test
     - name: Run tests
       run: xcodebuild
@@ -28,3 +29,4 @@ jobs:
             -sdk iphonesimulator
             -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max'
             clean test
+      working-directory: ./HTTPSSample
