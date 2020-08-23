@@ -6,51 +6,67 @@
 //  Copyright © 2020 kotetu. All rights reserved.
 //
 
+import Combine
+
 public final class APIClient {
     public enum APIError: Error {
-        case networkError(Error)
+        case timeout
+        case offLine
+        case unknownNetworkError(URLError)
         case httpErrorResonse(Int)
         case invalidURLResponse
-        case invalidResponseBody
     }
 
     public static let shared: APIClient = APIClient()
 
     private init() {}
 
-    public func jsonRequest(with url: URL,
-                            timeoutInterval: TimeInterval,
-                            isCachedResponse: Bool = false,
-                            _ completion: @escaping (Result<Data, APIError>) -> Void) {
+    /// APIClientとして成功扱いとするステータスコード
+    private static let validStatusCodes: [Int] = (200...209) + [304]
+
+    public func jsonRequest<V>(with url: URL,
+                               timeoutInterval: TimeInterval,
+                               retryCount: Int = 0,
+                               isCachedResponse: Bool = false) -> AnyPublisher<V, Error> where V: Decodable {
         let request = URLRequest(url: url,
                                  cachePolicy: isCachedResponse ? .returnCacheDataElseLoad : .reloadIgnoringCacheData,
                                  timeoutInterval: timeoutInterval)
 
-        let session = URLSession(configuration: .default)
-        let dataTask = session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(.networkError(error)))
-                return
-            }
+        return URLSession.shared
+            .dataTaskPublisher(for: request)
+            .mapError{ APIClient.convert(from: $0) }
+            .retry(retryCount)
+            .tryMap({ element -> Data in
+                guard let apiError = APIClient.convert(from: element.response, statusCodes: APIClient.validStatusCodes) else {
+                    return element.data
+                }
+                throw apiError
+            })
+            .decode(type: V.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
 
-            guard let httpResponse = response as? HTTPURLResponse else {
-                completion(.failure(.invalidURLResponse))
-                return
-            }
+    private static func convert(from urlError: URLError) -> APIError {
+        switch urlError.code {
+        case .timedOut:
+            return APIError.timeout
+        case .notConnectedToInternet:
+            return APIError.offLine
+        default:
+            break
+        }
+        return APIError.unknownNetworkError(urlError)
+    }
 
-            let validStatuses = (200...209) + [304]
-            guard validStatuses.contains(httpResponse.statusCode) else {
-                completion(.failure(.httpErrorResonse(httpResponse.statusCode)))
-                return
-            }
-
-            guard let data = data else {
-                completion(.failure(.invalidResponseBody))
-                return
-            }
-            completion(.success(data))
+    private static func convert(from response: URLResponse, statusCodes: [Int]) -> APIError? {
+        guard let httpResponse = response as? HTTPURLResponse else {
+            return APIError.invalidURLResponse
         }
 
-        dataTask.resume()
+        guard statusCodes.contains(httpResponse.statusCode) else {
+            return APIError.httpErrorResonse(httpResponse.statusCode)
+        }
+
+        return nil
     }
 }

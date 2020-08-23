@@ -15,8 +15,14 @@ final class StatusViewModel: ObservableObject {
     @Published var status = "Getting status..."
     @Published var loading = false
 
+    private var cancellables: Set<AnyCancellable> = []
+
     init() {
         fetch()
+    }
+
+    deinit {
+        cancellables.forEach { $0.cancel() }
     }
 
     func fetch() {
@@ -29,21 +35,20 @@ final class StatusViewModel: ObservableObject {
         }
 
         // ゆっくり通信内容を確認するため、タイムアウト時間を長めに設定しておく(300s)
-        APIClient.shared.jsonRequest(with: url, timeoutInterval: 300) { result in
-            DispatchQueue.main.async {
+        let publisher: AnyPublisher<StatusAPI.Response, Error> = APIClient.shared.jsonRequest(with: url, timeoutInterval: 300)
+        publisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self]  result in
                 switch result {
-                case let .success(rawBody):
-                    do {
-                        let reponse = try JSONDecoder().decode(StatusAPI.Response.self, from: rawBody)
-                        self.status = "\(reponse.status.description)"
-                    } catch {
-                        self.status = "Parse error occured:\(error)"
-                    }
+                case .finished:
+                    break
                 case let .failure(error):
-                    self.status = "Error occured:\(error)"
+                    self?.status = "Error occured: \(error)"
                 }
-                self.loading = false
+                self?.loading = false
+            }) { [weak self] response in
+                self?.status = "\(response.status.description)"
             }
-        }
+            .store(in: &cancellables)
     }
 }
